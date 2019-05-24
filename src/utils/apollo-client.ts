@@ -14,9 +14,9 @@ const client = new ApolloClient({
     : new InMemoryCache(),
   connectToDevTools: process.browser,
   link: new HttpLink({
-    uri: 'https://gql-placeholder.herokuapp.com/graphql'
+    uri: 'https://gql-placeholder.herokuapp.com/graphql',
   }),
-  ssrMode: !process.browser
+  ssrMode: !process.browser,
 });
 
 export default client;

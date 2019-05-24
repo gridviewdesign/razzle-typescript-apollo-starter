@@ -1,15 +1,24 @@
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import React from 'react';
+import { ApolloProvider } from '@apollo/react-hooks';
+import React, { Fragment } from 'react';
 import { hydrate } from 'react-dom';
-import { ApolloProvider } from 'react-apollo';
-
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 import client from './utils/apollo-client';
+import GlobalStyle from './utils/global-styles';
+
+declare global {
+  interface Window {
+    __APOLLO_STATE__: any;
+  }
+}
 
 hydrate(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <App />
+      <Fragment>
+        <App />
+        <GlobalStyle />
+      </Fragment>
     </BrowserRouter>
   </ApolloProvider>,
   document.getElementById('root')
