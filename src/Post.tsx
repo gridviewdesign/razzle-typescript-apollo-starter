@@ -20,8 +20,8 @@ interface RouteInfo {
 }
 
 const Post = () => {
-  const { match } = useRouter().match.params;
-  const { post_id } = match.params;
+  const { match } = useRouter();
+  const { post_id } = match.params || { post_id: '' };
 
   return (
     <div>
