@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import React from 'react';
 import useRouter from 'use-react-router';
 import Container from '../components/atoms/Container';
+import { Helmet } from 'react-helmet';
 
 const GET_POST = gql`
   query Post($id: Int!) {
@@ -26,10 +27,15 @@ const Post: React.FC = () => {
   }
 
   return (
-    <Container>
-      <h1>{data.post.title}</h1>
-      <p>{data.post.body}</p>
-    </Container>
+    <>
+      <Helmet>
+        <title>{data.post.title}</title>
+      </Helmet>
+      <Container>
+        <h1>{data.post.title}</h1>
+        <p>{data.post.body}</p>
+      </Container>
+    </>
   );
 };
 
