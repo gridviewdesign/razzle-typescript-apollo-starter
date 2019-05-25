@@ -27,7 +27,7 @@ const Posts: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
-  const postsData = data.posts.slice(0, 9);
+  const postsData = data.posts.slice(9, 19);
 
   return (
     <ul>

@@ -17,5 +17,4 @@ export default new ApolloClient({
   cache: process.browser
     ? new InMemoryCache().restore(window.__APOLLO_STATE__)
     : new InMemoryCache(),
-  ssrForceFetchDelay: 100,
 });
