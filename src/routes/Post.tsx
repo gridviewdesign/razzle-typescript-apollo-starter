@@ -3,16 +3,8 @@ import React from 'react';
 import useRouter from 'use-react-router';
 import Container from '../components/atoms/Container';
 import { Helmet } from 'react-helmet';
-import { RouteComponentProps } from 'react-router-dom';
 
 import { GET_POST } from '../config/querys';
-
-export interface match<P> {
-  params: P;
-  isExact: boolean;
-  path: string;
-  url: string;
-}
 
 const Post: React.FC = () => {
   const { match } = useRouter<{ id: string }>();
