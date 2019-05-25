@@ -1,16 +1,8 @@
 import { useQuery } from 'react-apollo-hooks';
-import gql from 'graphql-tag';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const GET_POSTS = gql`
-  {
-    posts {
-      id
-      title
-    }
-  }
-`;
+import { GET_POSTS } from '../config/querys';
 
 interface Post {
   id: number;

@@ -1,22 +1,22 @@
 import { useQuery } from 'react-apollo-hooks';
-import gql from 'graphql-tag';
 import React from 'react';
 import useRouter from 'use-react-router';
 import Container from '../components/atoms/Container';
 import { Helmet } from 'react-helmet';
+import { RouteComponentProps } from 'react-router-dom';
 
-const GET_POST = gql`
-  query Post($id: Int!) {
-    post(id: $id) {
-      title
-      body
-    }
-  }
-`;
+import { GET_POST } from '../config/querys';
+
+export interface match<P> {
+  params: P;
+  isExact: boolean;
+  path: string;
+  url: string;
+}
 
 const Post: React.FC = () => {
-  const { match } = useRouter();
-  const id = parseInt(match.params.id, 10);
+  const { match } = useRouter<{ id: string }>();
+  const { id } = match.params;
   const { loading, error, data } = useQuery(GET_POST, { variables: { id } });
 
   if (loading) {
