@@ -1,8 +1,7 @@
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider, getMarkupFromTree } from 'react-apollo-hooks';
 import express from 'express';
 import 'isomorphic-fetch';
 import React, { Fragment } from 'react';
-import { getDataFromTree } from 'react-apollo';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import { ServerStyleSheet } from 'styled-components';
@@ -39,12 +38,11 @@ server
       </ApolloProvider>
     );
 
-    try {
-      await getDataFromTree(<Root />);
-    } catch (e) {
-      console.log(e);
-    }
-    let initialApolloState = client.extract();
+    await getMarkupFromTree({
+      renderFunction: renderToString,
+      tree: <Root />,
+    });
+    const initialApolloState = client.extract();
 
     // chaning intial state as per requirement
     // initialApolloState.ROOT_QUERY.mode = themeMode
@@ -103,11 +101,12 @@ ${styleTags}
     </head>
     <body >
         <div id="root">${markup}</div>
-           <script>
-          window.__APOLLO_STATE__ = ${JSON.stringify(
-        initialApolloState
-    ).replace(/</g, '\\u003c')}
-        </script>
+        <script>
+        window.__APOLLO_STATE__ = ${
+          JSON.stringify(initialApolloState)
+          .replace(/</g, '\\u003c')
+        }
+      </script>
     </body>
 </html>`
     );

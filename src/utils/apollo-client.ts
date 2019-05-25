@@ -8,15 +8,14 @@ declare global {
   }
 }
 
-const client = new ApolloClient({
-  cache: process.browser
-    ? new InMemoryCache().restore(window.__APOLLO_STATE__)
-    : new InMemoryCache(),
+export default new ApolloClient({
   connectToDevTools: process.browser,
+  ssrMode: !process.browser,
   link: new HttpLink({
     uri: 'https://gql-placeholder.herokuapp.com/graphql',
   }),
-  ssrMode: !process.browser,
+  cache: process.browser
+    ? new InMemoryCache().restore(window.__APOLLO_STATE__)
+    : new InMemoryCache(),
+  ssrForceFetchDelay: 100,
 });
-
-export default client;
