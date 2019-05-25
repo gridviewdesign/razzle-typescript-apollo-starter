@@ -9,6 +9,8 @@ import { ServerStyleSheet } from 'styled-components';
 import App from './App';
 import client from './utils/apollo-client';
 import Global from './utils/global-styles';
+import { ThemeProvider } from 'styled-components';
+import theme from './utils/theme';
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST);
 
@@ -33,10 +35,12 @@ server
     const Root = () => (
       <ApolloProvider client={client}>
         <StaticRouter location={req.url} context={context}>
-          <Fragment>
-            <App />
-            <Global />
-          </Fragment>
+          <ThemeProvider theme={theme}>
+            <Fragment>
+              <App />
+              <Global />
+            </Fragment>
+          </ThemeProvider>
         </StaticRouter>
       </ApolloProvider>
     );
