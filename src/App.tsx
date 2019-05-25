@@ -20,14 +20,18 @@ const App = () => {
     leave: { opacity: 0 },
   });
 
-  return transition.map(({ item, props, key }) => (
-    <RouteContainer key={key} style={props}>
-      <Switch location={item}>
-        <Route exact={true} path="/" component={Home} />
-        <Route path="/:id" component={Post} />
-      </Switch>
-    </RouteContainer>
-  ));
+  return (
+    <>
+      {transition.map(({ item, props, key }) => (
+        <RouteContainer key={key} style={props}>
+          <Switch location={item}>
+            <Route exact={true} path="/" component={Home} />
+            <Route path="/:id" component={Post} />
+          </Switch>
+        </RouteContainer>
+      ))}
+    </>
+  );
 };
 
 export default App;
